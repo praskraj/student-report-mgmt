@@ -1,5 +1,6 @@
 package com.api.annualreportmgmt.controller;
 
+import com.api.annualreportmgmt.dto.ApiResponse;
 import com.api.annualreportmgmt.dto.RegisterDetails;
 import com.api.annualreportmgmt.entity.User;
 import com.api.annualreportmgmt.service.LoginService;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
 @RequestMapping("/api/login")
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class LoginController {
 
     @Autowired
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody RegisterDetails newUser) {
+    public ResponseEntity<ApiResponse> register(@RequestBody RegisterDetails newUser) {
         return loginService.register(newUser);
     }
 }
