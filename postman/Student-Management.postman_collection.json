@@ -1,0 +1,173 @@
+{
+	"info": {
+		"_postman_id": "4607f106-5b19-44ea-ba6b-cec6794ca394",
+		"name": "Student-Management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49371042",
+		"_collection_link": "https://prasannavenkatesh-rajendran1109-2853039.postman.co/workspace/Prasanna-Venkatesh-Rajendran's-~bbfcd7dc-33ba-4ad3-8681-b9952bd1b32b/collection/49371042-4607f106-5b19-44ea-ba6b-cec6794ca394?action=share&source=collection_link&creator=49371042"
+	},
+	"item": [
+		{
+			"name": "Staff-Requests",
+			"item": [
+				{
+					"name": "Create-Staff",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"staffNo\": \"ST0909\",\r\n    \"staffName\": \"PrasannaVenkatesh\",\r\n    \"staffDeptNo\": 1005,\r\n    \"staffDeptName\": \"Information Technology\",\r\n    \"staffAttendance\": \"Present\",\r\n    \"staffPhNo\": \"8902345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/staff/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All-Staff",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/staff/all?page=0&size=10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"all"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search-By-Name",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/staff/ST0909",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"ST0909"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search-By-Date",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/staff/date/2025-10-18",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"date",
+								"2025-10-18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateAttendance",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/staff/updateAttendance/ST0909/Present",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"updateAttendance",
+								"ST0909",
+								"Present"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProgram",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/staff/updateProgram/ST0909?staffProgram=Cricket%20Ground",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"staff",
+								"updateProgram",
+								"ST0909"
+							],
+							"query": [
+								{
+									"key": "staffProgram",
+									"value": "Cricket%20Ground"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download-Excel",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

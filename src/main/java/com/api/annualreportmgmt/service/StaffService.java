@@ -11,7 +11,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -101,4 +100,13 @@ public class StaffService {
         }
         return null; // Handle not found case properly
     }
+
+    public List<Staff> getStaffByDate(Date date) {
+        return staffRepository.findByDate(date);
+    }
+
+    public Staff createStaff(Staff staff) {
+        return staffRepository.save(staff);
+    }
+
 }
