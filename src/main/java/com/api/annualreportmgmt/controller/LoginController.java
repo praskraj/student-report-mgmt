@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +25,13 @@ public class LoginController {
     private LoginService loginService;
 
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
     public ResponseEntity<String> login(@RequestBody User loginRequest) {
         return loginService.login(loginRequest);
     }
 
     @PostMapping("/register")
+    @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
     public ResponseEntity<ApiResponse> register(@RequestBody RegisterDetails newUser) {
         return loginService.register(newUser);
     }
