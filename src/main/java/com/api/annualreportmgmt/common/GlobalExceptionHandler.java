@@ -13,32 +13,23 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class GlobalExceptionHandler {
+public class GlobalExceptionHandler extends AbstractExceptionResponse {
 
     // 🔒 Handles invalid credentials (401 Unauthorized)
     @ExceptionHandler({ BadCredentialsException.class, AuthenticationException.class })
     public ResponseEntity<Object> handleAuthenticationException(Exception ex, HttpServletRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("status", HttpStatus.UNAUTHORIZED.value());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
+        return  super.setAuthentication(HttpStatus.UNAUTHORIZED, ex.getMessage());
     }
 
     // 🚫 Handles forbidden access (403 Forbidden)
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<Object> handleAccessDeniedException(AccessDeniedException ex, HttpServletRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("status", HttpStatus.FORBIDDEN.value());
-        body.put("message", "You do not have permission to access this resource");
-        return new ResponseEntity<>(body, HttpStatus.FORBIDDEN);
+        return super.setAuthentication(HttpStatus.FORBIDDEN, "You do not have permission to access this resource");
     }
 
     // ⚠️ Catch-all fallback (optional)
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllExceptions(Exception ex, HttpServletRequest request) {
-        Map<String, Object> body = new LinkedHashMap<>();
-        body.put("status", HttpStatus.INTERNAL_SERVER_ERROR.value());
-        body.put("message", ex.getMessage());
-        return new ResponseEntity<>(body, HttpStatus.INTERNAL_SERVER_ERROR);
+        return super.setAuthentication(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage());
     }
 }
