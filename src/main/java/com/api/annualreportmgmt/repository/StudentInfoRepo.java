@@ -15,7 +15,7 @@ public interface StudentInfoRepo extends JpaRepository<Student, String> {
 
 	public List<Student> findBydeptcode(Long deptCode);
 	
-	@Query(value="select regno,rollno,age,name,deptcode,deptname,academic_year,passedout_year from student where lower(name) like %:name%",nativeQuery = true)
+	@Query(value="select regno,rollno,age,name,deptcode,deptname,academic_year,passedout_year,attendance_status,date_of_record from student where lower(name) like %:name%",nativeQuery = true)
 	public List<Student> searchStudent(@Param("name") String name);
 	
 	List<Student> findByAttendanceStatus(String attendanceStatus);

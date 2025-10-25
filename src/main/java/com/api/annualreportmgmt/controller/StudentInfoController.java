@@ -120,7 +120,7 @@ public class StudentInfoController {
         return studentInfoService.getStudentsByDate(date);
     }
     
- // Fetch student by Roll No
+    // Fetch student by Roll No
     @GetMapping("events/by-rollno")
     @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
     public Student getStudentByRollNo(@RequestParam("rollno") String rollno) {
