@@ -20,14 +20,16 @@ public class LoginService {
     @Autowired
     private RoleRepository roleRepository;
 
-    public ResponseEntity<String> login(@RequestBody User loginRequest) {
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
         User user = userRepository.findByUserNameAndPassWord(
                 loginRequest.getUserName(),
                 loginRequest.getPassWord()
         );
 
         if (user != null) {
-            return ResponseEntity.ok("Login successful!");
+            // Optionally, you can hide password before returning
+            user.setPassWord(null);
+            return ResponseEntity.ok(user);
         } else {
             return ResponseEntity.status(401).body("Invalid username or password");
         }

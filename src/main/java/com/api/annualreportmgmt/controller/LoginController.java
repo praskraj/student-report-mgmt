@@ -26,7 +26,7 @@ public class LoginController {
 
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
-    public ResponseEntity<String> login(@RequestBody User loginRequest) {
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
         return loginService.login(loginRequest);
     }
 
