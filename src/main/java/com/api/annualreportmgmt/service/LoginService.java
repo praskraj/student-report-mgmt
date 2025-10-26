@@ -26,10 +26,19 @@ public class LoginService {
                 loginRequest.getPassWord()
         );
 
+        RegisterDetails registerDetails = new RegisterDetails();
+
+        Role role = roleRepository.findByUserName(loginRequest.getUserName());
+
         if (user != null) {
             // Optionally, you can hide password before returning
             user.setPassWord(null);
-            return ResponseEntity.ok(user);
+            registerDetails.setFirstName(user.getFirstName());
+            registerDetails.setLastName(user.getLastName());
+            registerDetails.setUserName(user.getUserName());
+            registerDetails.setUserEmail(user.getUserEmail());
+            registerDetails.setUserRole(role.getUserRole());
+            return ResponseEntity.ok(registerDetails);
         } else {
             return ResponseEntity.status(401).body("Invalid username or password");
         }
