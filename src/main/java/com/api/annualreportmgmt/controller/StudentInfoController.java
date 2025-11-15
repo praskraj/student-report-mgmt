@@ -51,12 +51,18 @@ public class StudentInfoController {
     public ResponseEntity<List<Student>> getStudentDetailsUsingDept(@RequestParam("deptcode") Long deptcode) {
         return studentInfoService.getStudentDetailsUsingDept(deptcode);
     }
-    
+
     @GetMapping("/student/searchStudent")
     @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
-    public ResponseEntity<List<Student>> searchStudent(@RequestParam("name") String name) {
-        return studentInfoService.searchStudent(name);
+    public ResponseEntity<List<Student>> searchStudent(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String rollNo,
+            @RequestParam(required = false) Long deptcode,
+            @RequestParam(required = false) String deptname
+    ) {
+        return studentInfoService.searchStudent(name, rollNo, deptcode, deptname);
     }
+
     
     @GetMapping("/student/address")
     @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")

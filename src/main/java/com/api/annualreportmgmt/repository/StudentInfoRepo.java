@@ -26,5 +26,11 @@ public interface StudentInfoRepo extends JpaRepository<Student, String> {
     @Query("SELECT s FROM Student s WHERE s.rollno = :rollno")
     Student findByRollNo(@Param("rollno") String rollno);
 
+    public List<Student> findByrollno(@Param("rollno") String rollno);
+
+    public List<Student> findByname(@Param("name") String name);
+
+    public List<Student> findBydeptname(@Param("deptname") String deptname);
+
 	
 }

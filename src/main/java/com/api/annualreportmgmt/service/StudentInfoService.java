@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -55,12 +56,18 @@ public class StudentInfoService {
         }
     }
 
-    public ResponseEntity<List<Student>> searchStudent(String name) {
+    public ResponseEntity<List<Student>> searchStudent(String name, String rollNo, Long deptcode, String deptname) {
         // Fetch student from the repository
-
-        name = (name!=null?name.toLowerCase():"");
-
-        List<Student> student = studentRepository.searchStudent(name);
+        List<Student> student = new ArrayList<>();
+        if(name!=null && !name.isEmpty())   {
+            student = studentRepository.searchStudent(name);
+        } else if (rollNo!=null && !rollNo.isEmpty())   {
+            student = studentRepository.findByrollno(rollNo);
+        } else if (deptcode!=null && deptcode > 0) {
+            student = studentRepository.findBydeptcode(deptcode);
+        } else if (deptname!=null && !deptname.isEmpty()) {
+            student = studentRepository.findBydeptname(deptname);
+        }
 
         // If student is found, return details, otherwise return a 404
         if (student != null) {
