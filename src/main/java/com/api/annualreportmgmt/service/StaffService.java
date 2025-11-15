@@ -75,7 +75,7 @@ public class StaffService {
                 row.createCell(1).setCellValue(staff.getStaffName());
                 row.createCell(2).setCellValue(staff.getStaffDeptName());
                 row.createCell(3).setCellValue(staff.getStaffPhNo());
-                row.createCell(4).setCellValue(staff.getDateOfRecord().toString());
+                row.createCell(4).setCellValue(staff.getDateOfRecord());
                 row.createCell(5).setCellValue(staff.getStaffAttendance());
             }
 

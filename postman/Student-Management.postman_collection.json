@@ -502,15 +502,28 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/student/",
+							"raw": "http://localhost:8080/student?page=0&size=5&sortBy=name",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"student",
-								""
+								"student"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "size",
+									"value": "5"
+								},
+								{
+									"key": "sortBy",
+									"value": "name"
+								}
 							]
 						}
 					},
@@ -716,6 +729,47 @@
 							"path": [
 								"event",
 								"IT1709"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetStudentInfoForEvent",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/events/by-rollno?rollno=IT1709",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"events",
+								"by-rollno"
+							],
+							"query": [
+								{
+									"key": "rollno",
+									"value": "IT1709"
+								}
 							]
 						}
 					},

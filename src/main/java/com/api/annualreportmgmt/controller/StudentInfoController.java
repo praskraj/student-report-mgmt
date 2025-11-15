@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import com.api.annualreportmgmt.service.StudentInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -62,12 +63,17 @@ public class StudentInfoController {
     public ResponseEntity<List<Address>> getStudentAddress(@RequestParam("rollno") String rollno) {
         return studentInfoService.getStudentAddress(rollno);
     }
-    
-    @GetMapping("/student/")
+
+    @GetMapping("/student")
     @PreAuthorize("hasAnyRole('ADMIN','NORMALUSER')")
-    public List<Student> getAllStudents() {
-        return studentInfoService.getAllStudents();
+    public Page<Student> getAllStudents(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy
+    ) {
+        return studentInfoService.getAllStudents(page, size, sortBy);
     }
+
 	
     // POST Method to create an Employee
     @PostMapping("/profiles")

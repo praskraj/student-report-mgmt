@@ -7,6 +7,10 @@ import com.api.annualreportmgmt.repository.AddressRepo;
 import com.api.annualreportmgmt.repository.EventRepository;
 import com.api.annualreportmgmt.repository.StudentInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
@@ -78,8 +82,9 @@ public class StudentInfoService {
         }
     }
 
-    public List<Student> getAllStudents() {
-        return studentRepository.findAll();
+    public Page<Student> getAllStudents(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
+        return studentRepository.findAll(pageable);
     }
 
     public ResponseEntity<Student> createEmployee(Student employee) {
