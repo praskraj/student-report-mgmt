@@ -5,6 +5,7 @@ import com.api.annualreportmgmt.entity.Student;
 import com.api.annualreportmgmt.repository.AlumniRepository;
 import com.api.annualreportmgmt.repository.StudentInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -48,7 +49,7 @@ public class AlumniService {
     }
 
 
-    @GetMapping("/all")
+    @Cacheable(value = "get_all_alumni")
     public List<Alumni> getAllAlumni() {
         return alumniRepository.findAll();
     }

@@ -6,6 +6,7 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
@@ -37,18 +38,17 @@ public class StaffService implements Serializable {
     @Autowired
     private StaffRepository staffRepository;
 
-    // ✅ Fetch All Staff (Paginated)
+    @Cacheable(value = "get_all_staffs")
     public Page<Staff> getAllStaff(PageRequest pageRequest) {
         return staffRepository.findAll(pageRequest);
     }
 
-    // ✅ Fetch Staff by Staff Number
+    @Cacheable(value = "get_staff_by_no")
     public Staff getStaffByNo(String staffNo) {
         return staffRepository.findById(staffNo)
                 .orElseThrow(() -> new RuntimeException("Staff not found!"));
     }
 
-    // ✅ Update Attendance
     public void updateAttendance(String staffNo, String status) throws ParseException {
         Optional<Staff> staffOptional = staffRepository.findById(staffNo);
         if (staffOptional.isPresent()) {
@@ -63,7 +63,6 @@ public class StaffService implements Serializable {
         }
     }
 
-    // ✅ Export Staff List to Excel
     public ResponseEntity<Resource> exportToExcel() {
         List<Staff> staffList = staffRepository.findAll();
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
@@ -106,9 +105,10 @@ public class StaffService implements Serializable {
             staff.setStaffProgram(staffProgram);
             return staffRepository.save(staff);
         }
-        return null; // Handle not found case properly
+        return null;
     }
 
+    @Cacheable(value = "get_staff_by_date")
     public List<Staff> getStaffByDate(Date date) {
         return staffRepository.findByDate(date);
     }

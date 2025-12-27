@@ -33,6 +33,7 @@ public class StudentInfoService {
     @Autowired
     private EventRepository eventRepository;
 
+    @Cacheable(value = "get_students_by_rollno")
     public ResponseEntity<Student> getStudentDetails(@PathVariable("rollno") String rollno) {
         // Fetch student from the repository
         Student student = studentRepository.findById(rollno).orElse(null);
@@ -45,6 +46,7 @@ public class StudentInfoService {
         }
     }
 
+    @Cacheable(value = "get_students_by_deptcode")
     public ResponseEntity<List<Student>> getStudentDetailsUsingDept(@RequestParam("deptcode") Long deptcode) {
         // Fetch student from the repository
         List<Student> student = studentRepository.findBydeptcode(deptcode);
@@ -57,6 +59,7 @@ public class StudentInfoService {
         }
     }
 
+    @Cacheable(value = "search_student")
     public ResponseEntity<List<Student>> searchStudent(String name, String rollNo, Long deptcode, String deptname) {
         // Fetch student from the repository
         List<Student> student = new ArrayList<>();
@@ -78,6 +81,7 @@ public class StudentInfoService {
         }
     }
 
+    @Cacheable(value = "get_students_address")
     public ResponseEntity<List<Address>> getStudentAddress(String rollno) {
         // Fetch student from the repository
         List<Address> address = addressRepo.findByrollno(rollno);
@@ -121,10 +125,12 @@ public class StudentInfoService {
         }
     }
 
+    @Cacheable(value = "get_students_on_duty")
     public List<Student> getOnDutyStudents() {
         return studentRepository.findByAttendanceStatus("On Duty");
     }
 
+    @Cacheable(value = "get_events_by_roll_no")
     public Optional<Event> getEventByRollNo(String rollNo) {
         return eventRepository.findById(rollNo);
     }
@@ -133,10 +139,12 @@ public class StudentInfoService {
         return eventRepository.save(event);
     }
 
+    @Cacheable(value = "get_students_by_date")
     public List<Student> getStudentsByDate(Date  date) {
         return studentRepository.findByDateOfRecord(date);
     }
 
+    @Cacheable(value = "get_students_by_roll_no")
     public Student getStudentByRollNo(String rollno) {
         return studentRepository.findByRollNo(rollno);
     }
