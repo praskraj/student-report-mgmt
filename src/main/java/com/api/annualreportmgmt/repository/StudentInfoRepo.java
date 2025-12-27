@@ -19,8 +19,11 @@ public interface StudentInfoRepo extends JpaRepository<Student, String> {
 	public List<Student> searchStudent(@Param("name") String name);
 	
 	List<Student> findByAttendanceStatus(String attendanceStatus);
-	
-    @Query("SELECT s FROM Student s WHERE s.dateOfRecord = :date and s.attendanceStatus = 'On Duty'")
+//
+//    @Query("SELECT s FROM Student s WHERE s.dateOfRecord = :date and s.attendanceStatus = 'On Duty'")
+//    List<Student> findByDateOfRecord(@Param("date") Date date);
+
+    @Query("SELECT s FROM Student s WHERE s.dateOfRecord = :date")
     List<Student> findByDateOfRecord(@Param("date") Date date);
     
     @Query("SELECT s FROM Student s WHERE s.rollno = :rollno")
