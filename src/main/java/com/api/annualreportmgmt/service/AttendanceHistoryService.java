@@ -2,6 +2,7 @@ package com.api.annualreportmgmt.service;
 
 import com.api.annualreportmgmt.entity.AttendanceHistory;
 import com.api.annualreportmgmt.repository.AttendanceHistoryRepository;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class AttendanceHistoryService {
         this.repository = repository;
     }
 
+    @Cacheable(value = "attendance_all")
     public List<AttendanceHistory> getAll() {
         return repository.findAll();
     }
@@ -23,6 +25,7 @@ public class AttendanceHistoryService {
         return repository.save(history);
     }
 
+    @Cacheable(value = "attendance_by_name", key = "#name", condition = "#name != null")
     public List<AttendanceHistory> searchByName(String name) {
         return repository.findByNameContainingIgnoreCase(name);
     }

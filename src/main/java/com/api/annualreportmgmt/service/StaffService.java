@@ -1,5 +1,10 @@
 package com.api.annualreportmgmt.service;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,20 +16,23 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import com.api.annualreportmgmt.entity.Staff;
 import com.api.annualreportmgmt.repository.StaffRepository;
-import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 @Service
-public class StaffService {
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+public class StaffService implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Autowired
     private StaffRepository staffRepository;

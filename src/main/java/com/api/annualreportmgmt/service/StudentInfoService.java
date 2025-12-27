@@ -7,6 +7,7 @@ import com.api.annualreportmgmt.repository.AddressRepo;
 import com.api.annualreportmgmt.repository.EventRepository;
 import com.api.annualreportmgmt.repository.StudentInfoRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -89,6 +90,7 @@ public class StudentInfoService {
         }
     }
 
+    @Cacheable(value = "get_all_students")
     public Page<Student> getAllStudents(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy).ascending());
         return studentRepository.findAll(pageable);
