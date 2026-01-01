@@ -27,7 +27,7 @@ import com.api.annualreportmgmt.repository.AddressRepo;
 import com.api.annualreportmgmt.repository.EventRepository;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentInfoController {
 
     @Autowired

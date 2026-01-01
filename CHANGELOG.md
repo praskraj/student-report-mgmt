@@ -4,4 +4,5 @@
 2. ARM_BE - Added Docker Web Service Config - DEC-25
 3. ARM_BE - Added removing redis - DEC-25
 4. ARM_BE - Fix Search Student By Name - DEC-25
-5. ARM_BE - Fix Filter Student By Date - DEC-25
+5. ARM_BE - Fix Filter Student By Date - DEC-25 
+6. ARM_BE - Fix for Student Info attendance status - JAN-26
