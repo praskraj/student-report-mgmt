@@ -1,11 +1,13 @@
 package com.api.annualreportmgmt.controller;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import com.api.annualreportmgmt.service.StudentInfoService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -138,5 +140,17 @@ public class StudentInfoController {
     public Student getStudentByRollNo(@RequestParam("rollno") String rollno) {
         return studentInfoService.getStudentByRollNo(rollno);
     }
-    
+
+    @GetMapping("/students/export-excel")
+    public void exportStudents(HttpServletResponse response) throws IOException {
+
+        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+        response.setHeader(
+                "Content-Disposition",
+                "attachment; filename=students.xlsx"
+        );
+
+        studentInfoService.exportStudentsToExcel(response);
+    }
+
 }

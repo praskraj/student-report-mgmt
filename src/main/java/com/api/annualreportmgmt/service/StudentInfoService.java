@@ -6,6 +6,12 @@ import com.api.annualreportmgmt.entity.Student;
 import com.api.annualreportmgmt.repository.AddressRepo;
 import com.api.annualreportmgmt.repository.EventRepository;
 import com.api.annualreportmgmt.repository.StudentInfoRepo;
+import jakarta.servlet.ServletOutputStream;
+import jakarta.servlet.http.HttpServletResponse;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
@@ -16,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -147,6 +154,58 @@ public class StudentInfoService {
     @Cacheable(value = "get_students_by_roll_no")
     public Student getStudentByRollNo(String rollno) {
         return studentRepository.findByRollNo(rollno);
+    }
+
+    public void exportStudentsToExcel(HttpServletResponse response) throws IOException {
+
+        List<Student> students = studentRepository.findAll();
+
+        Workbook workbook = new XSSFWorkbook();
+        Sheet sheet = workbook.createSheet("Students");
+
+        // Header Row
+        Row headerRow = sheet.createRow(0);
+        String[] headers = {
+                "Roll No", "Reg No", "Name", "Dept Code", "Dept Name",
+                "Academic Year", "Passed Out Year", "Age",
+                "Attendance Status", "Date Of Record"
+        };
+
+        for (int i = 0; i < headers.length; i++) {
+            headerRow.createCell(i).setCellValue(headers[i]);
+        }
+
+        // Data Rows
+        int rowNum = 1;
+        for (Student s : students) {
+            Row row = sheet.createRow(rowNum++);
+
+            row.createCell(0).setCellValue(s.getRollno());
+            row.createCell(1).setCellValue(s.getRegno());
+            row.createCell(2).setCellValue(s.getName());
+            row.createCell(3).setCellValue(s.getDeptcode());
+            row.createCell(4).setCellValue(s.getDeptname());
+            row.createCell(5).setCellValue(s.getAcademicYear());
+            row.createCell(6).setCellValue(s.getPassedoutYear());
+            if (s.getAge() != null) {
+                row.createCell(7).setCellValue(s.getAge());
+            }
+            row.createCell(8).setCellValue(s.getAttendanceStatus());
+
+            if (s.getDateOfRecord() != null) {
+                row.createCell(9).setCellValue(s.getDateOfRecord());
+            }
+        }
+
+        // Auto-size columns
+        for (int i = 0; i < headers.length; i++) {
+            sheet.autoSizeColumn(i);
+        }
+
+        ServletOutputStream outputStream = response.getOutputStream();
+        workbook.write(outputStream);
+        workbook.close();
+        outputStream.close();
     }
 
 }
