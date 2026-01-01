@@ -7,3 +7,4 @@
 5. ARM_BE - Fix Filter Student By Date - DEC-25 
 6. ARM_BE - Fix for Student Info attendance status - JAN-26
 7. ARM_BE - Added excel export for Student Info - JAN-26
+8. ARM_BE - Implementation for MYSQL DB Connection - JAN-26
