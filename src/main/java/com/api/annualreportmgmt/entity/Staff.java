@@ -56,7 +56,6 @@ public class Staff {
 		this.dateOfRecord = dateOfRecord;
 	}
 
-	// Getters and Setters
     public String getStaffNo() {
         return staffNo;
     }
