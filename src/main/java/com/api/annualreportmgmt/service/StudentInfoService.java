@@ -44,10 +44,9 @@ public class StudentInfoService {
 
     @Cacheable(value = "get_students_by_rollno")
     public ResponseEntity<Student> getStudentDetails(@PathVariable("rollno") String rollno) {
-        // Fetch student from the repository
+
         Student student = studentRepository.findById(rollno).orElse(null);
 
-        // If student is found, return details, otherwise return a 404
         if (student != null) {
             return ResponseEntity.ok(student);
         } else {
@@ -57,10 +56,8 @@ public class StudentInfoService {
 
     @Cacheable(value = "get_students_by_deptcode")
     public ResponseEntity<List<Student>> getStudentDetailsUsingDept(@RequestParam("deptcode") Long deptcode) {
-        // Fetch student from the repository
         List<Student> student = studentRepository.findBydeptcode(deptcode);
 
-        // If student is found, return details, otherwise return a 404
         if (student != null) {
             return ResponseEntity.ok(student);
         } else {
@@ -70,7 +67,7 @@ public class StudentInfoService {
 
     @Cacheable(value = "search_student")
     public ResponseEntity<List<Student>> searchStudent(String name, String rollNo, Long deptcode, String deptname) {
-        // Fetch student from the repository
+
         List<Student> student = new ArrayList<>();
         if(name!=null && !name.isEmpty())   {
             student = studentRepository.searchStudent(name);
@@ -92,10 +89,8 @@ public class StudentInfoService {
 
     @Cacheable(value = "get_students_address")
     public ResponseEntity<List<Address>> getStudentAddress(String rollno) {
-        // Fetch student from the repository
         List<Address> address = addressRepo.findByrollno(rollno);
 
-        // If student is found, return details, otherwise return a 404
         if (address != null) {
             return ResponseEntity.ok(address);
         } else {

@@ -9,8 +9,6 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +27,6 @@ public class AlumniService {
         if (studentOpt.isPresent()) {
             Student student = studentOpt.get();
 
-            // Create alumni
             Alumni alumni = new Alumni();
             alumni.setRollno(student.getRollno());
             alumni.setRegno(student.getRegno());
@@ -40,14 +37,13 @@ public class AlumniService {
             alumni.setPassedoutyear(student.getPassedoutYear());
 
             alumniRepository.save(alumni);
-            studentRepository.deleteById(rollno); // delete student from student table
+            studentRepository.deleteById(rollno);
 
             return ResponseEntity.ok("Moved to Alumni and removed from Student table");
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Student not found");
         }
     }
-
 
     @Cacheable(value = "get_all_alumni")
     public List<Alumni> getAllAlumni() {
