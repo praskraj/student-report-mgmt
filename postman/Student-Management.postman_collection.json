@@ -303,48 +303,6 @@
 			"name": "Student-Info",
 			"item": [
 				{
-					"name": "GetStudentByRollNo",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"auth": {
-							"type": "basic",
-							"basic": [
-								{
-									"key": "password",
-									"value": "admin123",
-									"type": "string"
-								},
-								{
-									"key": "username",
-									"value": "admin",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"staffNo\": \"ST0909\",\r\n    \"staffName\": \"PrasannaVenkatesh\",\r\n    \"staffDeptNo\": 1005,\r\n    \"staffDeptName\": \"Information Technology\",\r\n    \"staffAttendance\": \"Present\",\r\n    \"staffPhNo\": \"8902345678\"\r\n}"
-						},
-						"url": {
-							"raw": "http://localhost:8080/student/IT1709",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"student",
-								"IT1709"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "GetStudentByDeptCode",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -894,6 +852,48 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GetStudentByRollNo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"staffNo\": \"ST0909\",\r\n    \"staffName\": \"PrasannaVenkatesh\",\r\n    \"staffDeptNo\": 1005,\r\n    \"staffDeptName\": \"Information Technology\",\r\n    \"staffAttendance\": \"Present\",\r\n    \"staffPhNo\": \"8902345678\"\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/IT1709",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"IT1709"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -990,6 +990,91 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Alumni-Details",
+			"item": [
+				{
+					"name": "All-Alumni",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "MoveToAlumuni",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "admin123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "admin",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/alumni/moveToAlumni/IT1701",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumni",
+								"moveToAlumni",
+								"IT1701"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MoveToAlumuni",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "admin123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "admin",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/alumni/moveToAlumni/IT1701",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"alumni",
+						"moveToAlumni",
+						"IT1701"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }

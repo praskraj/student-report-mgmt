@@ -82,7 +82,6 @@ public class StudentInfoController {
         return studentInfoService.getAllStudents(page, size, sortBy);
     }
 
-	
     // POST Method to create an Employee
     @PostMapping("/profiles")
     @PreAuthorize("hasRole('ADMIN')")
